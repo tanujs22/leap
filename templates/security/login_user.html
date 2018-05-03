@@ -1,0 +1,38 @@
+{% extends "base_head.html" %}
+{% block title %} Student Login{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block security %}
+<div class="wrapper">
+<div class="card signin-box">
+<div class="card-body">
+  <div class="card-title">
+    <h3>Sign In</h3>
+  </div>
+  {% from "security/_macros.html" import render_field_with_errors, render_field %}
+  {% include "security/_messages.html" %}
+  <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+  	{{ login_user_form.hidden_tag() }}
+    <div class="form-group">
+      <label for="leap-id" class="bmd-label-floating"><span class="required"><span></label>
+      {{ render_field_with_errors(login_user_form.email, class="form-control", id="leap-id")}}
+      <span class="bmd-help">We'll never share your LEAP ID with anyone else.</span>
+    </div>
+    <div class="form-group">
+      <label for="dob" class="bmd-label-floating"></label>
+      {{ render_field_with_errors(login_user_form.password, class="form-control", id="date") }}
+    </div>
+    {{ render_field_with_errors(login_user_form.remember) }}
+    {{ render_field(login_user_form.next) }}
+    <div class="signin-button">
+      {{ render_field(login_user_form.submit, class='btn btn-raised btn-success') }}
+    </div>
+  </form>
+  <div class="form-group">
+    <div class="col-xs-offset-3 col-md-8 col-sm-9 text-center"><span class="text-muted label label-danger">Don't have an account? <a href="{{ url_for('security.register')}}">Sign Up!</a></span> </div>
+  </div>
+</div>
+</div> 
+</div>
+{% endblock %}

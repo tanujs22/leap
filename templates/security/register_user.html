@@ -1,0 +1,163 @@
+{% extends "base_head.html" %}
+{% block title %} Student Registration{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block security %}
+<div class="form-group">
+   <div class="col-xs-offset-3 col-md-8 col-sm-9"><span class="text-muted label label-danger">Let's set up your account, Already have one? <a href="{{ url_for('security.login')}}">Sign In Here</a>.</span></div>
+</div>
+ <div class="row">
+    <div class="col-md-12">
+      <section>
+        <h4 class="entry-title"><span>Personal Information</span></h4>
+        <hr>
+        {% from "security/_macros.html" import render_field_with_errors, render_field %}
+		{% include "security/_messages.html" %}
+        <form class="form-horizontal" id="signup" enctype="multipart/form-data" action="{{ url_for_security('register') }}" method="POST" name="register_user_form" >
+        	{{ register_user_form.hidden_tag() }}
+          <div class="form-group">
+            <label class="control-label col-sm-3 bmd-label-floating"> <span class="text-danger"></span></label>
+            <div class="col-md-8 col-sm-9">
+            	{{ render_field_with_errors(register_user_form.first_name, class='form-control') }}
+              
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-3 bmd-label-floating"><span class="text-danger"></span></label>
+            <div class="col-md-8 col-sm-9">
+              
+              {{ render_field_with_errors(register_user_form.last_name, class='form-control') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-3 bmd-label-floating"> <span class="text-danger"></span></label>
+            <div class="col-md-8 col-sm-9">
+              
+              {{ render_field_with_errors(register_user_form.password, class='form-control',placeholder='DDMMYYYY') }}
+            </div>
+          </div>
+
+  {% if register_user_form.password_confirm %}
+  <div class="form-group">
+            <label class="control-label col-sm-3 bmd-label-floating"> <span class="text-danger"></span></label>
+            <div class="col-md-8 col-sm-9">
+              
+              {{ render_field_with_errors(register_user_form.password_confirm, class='form-control',placeholder='DDMMYYYY') }}
+            </div>
+          </div>
+
+    
+  {% endif %}
+          <div class="form-group">
+            <label class="control-label col-sm-3"> <span class="text-danger"></span></label>
+            <div class="col-md-8 col-sm-9">
+              
+              {{ render_field_with_errors(register_user_form.gender) }}
+            </div>
+          </div>
+
+          
+
+          <div class="form-group">
+            <label class="control-label col-sm-3 bmd-label-floating"></label>
+            <div class="col-md-8 col-sm-9">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+               
+                {{ render_field_with_errors(register_user_form.email, class='form-control') }}
+              <small> Your Email Id is being used for ensuring the security of your account, authorization and access recovery. </small>
+            </div>
+          </div>
+         <div class="form-group">
+          <label class="control-label col-sm-3 bmd-label-floating"><span class="text-danger"></span></label>
+          <div class="col-md-5 col-sm-8">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+              <!-- <input type="text" class="form-control" name="contactnum" id="contactnum" value=""> -->
+              {{ render_field_with_errors(register_user_form.mobile_number, class='form-control') }}
+          </div>
+         </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-3 bmd-label-floating"></label>
+          <div class="col-md-5 col-sm-8">
+            <div >
+                
+                {{ render_field_with_errors(register_user_form.home_town, class='form-control') }}
+              </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-3 bmd-label-floating"></label>
+          <div class="col-md-5 col-sm-8">
+            <div >
+                
+                {{ render_field_with_errors(register_user_form.district, class='form-control') }}
+              </div>
+          </div>
+        </div>
+
+        <h4 class="entry-title"><span>Professional Information</span></h4>
+        <hr>
+
+        <div class="form-group">
+          <label class="control-label col-sm-3 bmd-label-floating"> <span class="text-danger"></span></label>
+          <div class="col-md-8 col-sm-9">
+            {{ render_field_with_errors(register_user_form.college_name, class='form-control') }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3 bmd-label-floating"><span class="text-danger"></span></label>
+          <div class="col-md-8 col-sm-9">
+          {{ render_field_with_errors(register_user_form.stream, class='form-control') }}
+        </div>
+      </div>
+        <div class="form-group" >
+          <label class="control-label col-sm-3 bmd-label-floating"><span class="text-danger"></span></label>
+          <div class="col-md-8 col-sm-9">
+                {{ render_field_with_errors(register_user_form.college_year, class='form-control') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-3 bmd-label-floating"> <span class="text-danger"></span></label>
+        <div class="col-md-8 col-sm-9">
+          
+          {{ render_field_with_errors(register_user_form.college_roll_number, class='form-control') }}
+        </div>
+      </div> 
+
+        <div class="form-group">
+          <div class="col-xs-offset-3 col-md-8 col-sm-9"><span class="text-muted"><span class="label label-danger">Note:-</span> By clicking Sign Up, you agree to our <a href="#">Terms</a> and that you have read our <a href="#">Policy</a>, including our <a href="#">Cookie Use</a>.</span> </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-offset-3 col-xs-10 signup-button">
+            {{ register_user_form.submit(class='btn btn btn-raised btn-success btn-success') }}</button>
+          </div>
+        </div>
+      </form>
+      </div>
+  </div>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery-3.2.1.slim.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/popper.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-material-design.js') }}"></script>
+<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+<!-- <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+  {{ register_user_form.hidden_tag() }}
+  {{ render_field_with_errors(register_user_form.first_name) }}
+  {{ render_field_with_errors(register_user_form.email) }}
+  {{ render_field_with_errors(register_user_form.password) }}
+  {% if register_user_form.password_confirm %}
+    {{ render_field_with_errors(register_user_form.password_confirm) }}
+  {% endif %}
+  {{ render_field_with_errors(register_user_form.college_year) }}
+  {{ render_field_with_errors(register_user_form.gender) }}
+
+
+  {{ render_field(register_user_form.submit) }}
+</form> -->
+<!-- {% include "security/_menu.html" %} -->
+{% endblock %}

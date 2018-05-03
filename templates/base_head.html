@@ -1,0 +1,104 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Leap Skills | {% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+	{% block extra_head %}{% endblock %}
+</head>
+<body>
+
+	{% if current_user.has_role('student') %}
+	<div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+	<header class="bmd-layout-header">
+        <div class="navbar navbar-light bg-faded bg-color">
+          <button class="navbar-toggler d-block d-lg-non" type="button" data-toggle="drawer" data-target="#dw-s2">
+            <span class="sr-only">Toggle drawer</span>
+            <i class="material-icons">menu</i>
+          </button>
+          <ul class="nav navbar-nav col text-center justify-content-center align-self-center">
+            <li class="logo">
+              <img src="{{ url_for('static', filename = 'images/logo.svg') }}" width="75" height="auto" alt="leapskills Logo">
+            </li>
+          </ul>
+          <div>
+            <img src="{{ url_for('static', filename = 'images/nav-triangle-tranparent.png') }}" width="45" height="auto" alt="leapskills Logo">
+          </div>
+        </div>
+      </header>
+      <div id="dw-s2" class="bmd-layout-drawer bg-faded">
+        <header>
+            <a class="navbar-brand"><span> Hi </span><span class="username"> {{ current_user.first_name }} </span></a>
+        </header>
+        <ul class="list-group">
+          <a class="list-group-item" href="#">Home</a>
+          <a class="list-group-item" href="#">Personal Info</a>
+          <a class="list-group-item" href="#">Professional Info</a>
+          <a class="list-group-item" href="#">Change Information</a>
+          <a class="list-group-item" href="#">Feedback</a>
+          <a class="list-group-item" href="#">Contact Us</a>
+          <a class="list-group-item" href="{{ url_for_security('logout') }}">Logout</a>
+        </ul>
+      </div>
+      {% elif current_user.has_role('trainer') %}
+      <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+      	    <header class="bmd-layout-header">
+      <div class="navbar navbar-light bg-faded bg-color">
+        <button class="navbar-toggler d-block d-lg-non" type="button" data-toggle="drawer" data-target="#dw-s2">
+            <span class="sr-only">Toggle drawer</span>
+            <i class="material-icons">menu</i>
+          </button>
+        <ul class="nav navbar-nav col text-center justify-content-center align-self-center">
+          <li class="logo">
+            <img src="{{ url_for('static', filename = 'images/logo.svg') }}" width="75" height="auto" alt="leapskills Logo">
+          </li>
+        </ul>
+        <div>
+          <img src="{{ url_for('static', filename = 'images/nav-triangle-tranparent.png') }}" width="45" height="auto" alt="leapskills-triangle">
+        </div>
+      </div>
+    </header>
+    <div id="dw-s2" class="bmd-layout-drawer bg-faded">
+      <header>
+        <a class="navbar-brand"></a>
+      </header>
+      <ul class="list-group">
+        <a class="list-group-item" href="#">Attendence</a>
+        <a class="list-group-item" href="#">Student Information</a>
+        <a class="list-group-item" href="#">Batch Information</a>
+        <a class="list-group-item" href="#">Time Table</a>
+        <a class="list-group-item" href="#">Student Dropped</a>
+        <a class="list-group-item" href="#">Feedback</a>
+        <a class="list-group-item" href="#">Contact Us</a>
+        <a class="list-group-item" href="{{ url_for_security('logout') }}">Logout</a>
+      </ul>
+    </div>
+	{% else %}
+	<header>
+      <nav class="navbar navbar-custom">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="https://leapskills.in">
+            <img src="{{ url_for('static', filename = 'images/logo.svg') }}" width="80" height="auto" alt="Leap_Skills_Logo">
+          </a>
+        </div>
+      </nav>
+    </header>
+    {% endif %}
+	<div id="container">{% block welcome_banner %}{% endblock %}</div>
+	<div id="container">{% block security %}{% endblock %}</div>
+	<main class="bmd-layout-content" >{% block user_view %}{% endblock %}</main>
+
+	<script type="text/javascript" src="{{ url_for('static', filename = 'js/material.min.js') }}"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+</body>
+</html>
