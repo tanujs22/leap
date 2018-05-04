@@ -109,6 +109,6 @@ ul#gender {
   padding: 0;
 }
 
-.navbar-custom, .navbar-light {
+nav.navbar.navbar-custom, nav.navbar.navbar-light {
   height: 65px !important;
 }
