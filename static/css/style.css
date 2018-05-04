@@ -108,3 +108,7 @@ ul#gender {
   list-style: none;
   padding: 0;
 }
+
+.navbar-custom, .navbar-light {
+  height: 65px !important;
+}
