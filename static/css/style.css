@@ -101,3 +101,10 @@ a.list-group-item {
   border: none !important;
   outline: none;
 }
+
+ul#gender {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+}
